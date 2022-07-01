@@ -1,0 +1,32 @@
+.nav-links {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    list-style-type: none;
+    margin-left: auto;
+    flex: 1 1;
+    max-width: 650px;
+    grid-gap: 50px;
+    gap: 50px;
+}
+
+a {
+    color: white;
+}
+
+#sign-up, button {
+    background: transparent;
+    border: 1px solid transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all .1s ease;
+    padding: 12px 18px;
+    border-radius: 4px;
+    background: #00c98e;
+    color: #fff;
+}

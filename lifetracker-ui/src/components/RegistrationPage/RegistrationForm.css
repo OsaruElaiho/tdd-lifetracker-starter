@@ -1,0 +1,80 @@
+.registration-form {
+    min-height: calc(100vh - 100px);
+    height: 100%;
+    max-height: calc(100vh - 100px);
+    width: 100%;
+    max-width: 100vw;
+    background: #2c4147;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+}
+
+.registration-form .card {
+    min-height: 600px;
+    width: 520px;
+    padding: 24px 36px 0;
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+}
+
+.registration-form .card h2 {
+    font-size: 42px;
+    margin-bottom: 4px;
+    font-weight: 600;
+    color: white;
+}
+.registration-form .card .form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    padding-bottom: 10px;
+    color: white;
+}
+
+.input-field {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    margin: 8px 0;
+    flex: 1 1;
+}
+
+.form-input {
+    height: 50px;
+    padding: 0 15px;
+    font-size: 16px;
+    border: 1px solid #e4e4e4;
+    width: 100%;
+    background: transparent;
+    color: white;
+}
+
+.split-input-field {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    grid-gap: 20px;
+    gap: 20px;
+}
+
+.registration-form .card .form .input-field label {
+    margin-bottom: 5px;
+    color: white;
+}
+.registration-form .card .footer, .registration-form .card .form .submit-registration {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+div {
+    margin: 0;
+    padding: 0;
+    font-family: "Kanit",-apple-system,BlinkMacSystemFont,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
+    color: #212121;
+}
