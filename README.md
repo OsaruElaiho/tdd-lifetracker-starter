@@ -107,26 +107,26 @@ The components in the `App.jsx` file should render the following components (alo
 - To build out the front-end, start with the `App.jsx` component:
 
   - [ ] **`App.jsx`**
-    - [ ] Should be wrapped by an element with the `className` of `app`
+    - [x] Should be wrapped by an element with the `className` of `app`
     - [ ] The core App component that contains the routes for the app wrapped in Context providers
-    - [ ] Renders the `Navbar` component on every route
-    - [ ] Renders a `BrowserRouter` component that contains a `Routes` component with the following routes:
-      - [ ] `/` - Should render the `Landing.jsx` component
-      - [ ] `/login` - Should render the `LoginPage.jsx` component
-      - [ ] `/register` - Should render the `RegistrationPage.jsx` component
-      - [ ] `/activity` - Should render the `ActivityPage.jsx` component (only if the user is logged in, otherwise it renders the `AccessForbidden.jsx` component)
-      - [ ] `/nutrition/* - should render the `NutritionPage.jsx`component (only if the user is logged in, otherwise it renders the`AccessForbidden.jsx` component)
-      - [ ] `*` - anything else should render the `NotFound` component
+    - [x] Renders the `Navbar` component on every route
+    - [x] Renders a `BrowserRouter` component that contains a `Routes` component with the following routes:
+      - [x] `/` - Should render the `Landing.jsx` component
+      - [x] `/login` - Should render the `LoginPage.jsx` component
+      - [x] `/register` - Should render the `RegistrationPage.jsx` component
+      - [x] `/activity` - Should render the `ActivityPage.jsx` component (only if the user is logged in, otherwise it renders the `AccessForbidden.jsx` component)
+      - [] `/nutrition/* - should render the `NutritionPage.jsx`component (only if the user is logged in, otherwise it renders the`AccessForbidden.jsx` component)
+      - [x] `*` - anything else should render the `NotFound` component
   - [ ] To standarize API requests throughout the application, set up an **`ApiClient`** class
 
-    - [ ] Start by creating a `constants.js` file at the root of the project
+    - [x] Start by creating a `constants.js` file at the root of the project
       - [ ] In it, export a few variables:
       - [ ] `PRODUCTION_API_BASE_URL` - set to whatever url the production API is deployed at
       - [ ] `DEVELOPMENT_API_BASE_URL` - set to "http://localhost:3001" for development
       - [ ] `API_BASE_URL` - if `process.env.NODE_ENV` is `production`, set this to `PRODUCTION_API_BASE_URL`, otherwise set it to `DEVELOPMENT_API_BASE_URL`
-    - [ ] Next, create a `services` directory at the root of the project
-    - [ ] Inside that directory, touch an `apiClient.js` file
-    - [ ] In that file, import the `axios` package and the `API_BASE_URL` constant from the `constants.js` file
+    - [x] Next, create a `services` directory at the root of the project
+    - [x] Inside that directory, touch an `apiClient.js` file
+    - [x] In that file, import the `axios` package and the `API_BASE_URL` constant from the `constants.js` file
     - [ ] Define a new class in that file called `ApiClient`.
       - [ ] Give it a constructor function that accepts a single parameter - `remoteHostUrl`. The constructor should attach the `remoteHostUrl` parameter to a new instance with `this.remoteHostUrl = remoteHostUrl`. It should also set `this.token = null`.
       - [ ] Export default a new instance of the `ApiClient` class
@@ -206,9 +206,9 @@ The components in the `App.jsx` file should render the following components (alo
       - [x] `onChange` - the `onChange` handler function
     - [x] The component should validate the `email` field:
       - [x] If the user has entered text into the `email` field and it doesn't contain an `@` symbol, then an error message should be displayed in an element with the `className` of `error` indicating that the entry is not a valid email.
-    - [ ] The component should gracefully handle errors:
-      - [ ] If the user has attempted to login and gotten a `401` error, then an error message should be displayed in an element with the `className` of `error` indicating that the `email` and `password` combination is incorrect.
-      - [ ] If the user has attempted to login and gotten a `400` or `422` error, then an error message should be displayed in an element with the `className` of `error` indicating what went wrong.
+    - [x] The component should gracefully handle errors:
+      - [x] If the user has attempted to login and gotten a `401` error, then an error message should be displayed in an element with the `className` of `error` indicating that the `email` and `password` combination is incorrect.
+      - [x] If the user has attempted to login and gotten a `400` or `422` error, then an error message should be displayed in an element with the `className` of `error` indicating what went wrong.
     - [x] There should be a `button` element with the `className` of `submit-login`:
       - [x] It should contain the text `"Login"`
       - [x] When clicked, it should call the `loginUser` function

@@ -4,13 +4,36 @@ const {UnauthorizedError, BadRequestError} = require("../utils/errors")
 const { BCRYPT_WORK_FACTOR } = require("../config")
 
 class User{
+    static async makePublicUser(user){
+        return{
+            id: user.id,
+            email: user.email,
+            username: user.username,
+            firstName: user.first_name,
+            lastName: user.last_name,
+            createdAt: user.created_at,
+            updatedAt: user.updated_at
+        }
+    }
+
     static async login(credentials){
-        // const 
+        const requiredFields = ["email", "password"]
+        requiredFields.forEach(field => {
+            if (!credentials.hasOwnProperty(field)){
+                throw new BadRequestError(`Missing ${field} in request body.`)
+            }
+        })
+        const user = await User.fetchUserByEmail(credentials.email)
+        if(user){
+            const isValid = await bcrypt.compare(credentials.password, user.password)
+            if(isValid){
+                return User.makePublicUser(user)
+            }
+        }
         throw new UnauthorizedError("Invalid email or password")
     }
 
     static async register(credentials){
-        console.log(credentials.email)
         const requiredFields = ["email", "username", "firstName", "lastName", "password"]
         requiredFields.forEach(field => {
             if (!credentials.hasOwnProperty(field)){
@@ -46,7 +69,7 @@ class User{
         )
 
         const user = result.rows[0]
-        return user
+        return User.makePublicUser(user)
         
     }
 

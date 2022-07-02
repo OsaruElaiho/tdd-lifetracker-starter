@@ -1,12 +1,13 @@
 import React from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import "./LoginForm.css"
 import axios from "axios"
 
-export default function LoginForm() {
-const [isLoading, setIsLoading] = React.useState(false)
-const [errors, setErrors] = React.useState({})
-const [form, setForm] = React.useState({
+export default function LoginForm({ setAppState }) {
+  const navigate = useNavigate()
+  const [isLoading, setIsLoading] = React.useState(false)
+  const [errors, setErrors] = React.useState({})
+  const [form, setForm] = React.useState({
     email: "",
     password: "",
   })
@@ -14,7 +15,7 @@ const [form, setForm] = React.useState({
   const handleOnInputChange = (event) => {
     if (event.target.name === "email") {
       if (event.target.value.indexOf("@") === -1) {
-        setErrors((e) => ({ ...e, email: "Please enter a valid email." }))
+        setErrors((e) => ({ ...e, email: "Please enter a valid email. ❌" }))
       } else {
         setErrors((e) => ({ ...e, email: null }))
       }
@@ -30,11 +31,11 @@ const [form, setForm] = React.useState({
     try {
       const res = await axios.post(`http://localhost:3001/auth/login`, form)
       if (res?.data) {
-        setAppState(res.data)
+        //setAppState(res.data)
         setIsLoading(false)
-        navigate("/portal")
+        navigate("/activity")
       } else {
-        setErrors((e) => ({ ...e, form: "Invalid username/password combination" }))
+        setErrors((e) => ({ ...e, form: "Invalid username/password combination ❌" }))
         setIsLoading(false)
       }
     } catch (err) {

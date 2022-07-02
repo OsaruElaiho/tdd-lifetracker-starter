@@ -2,8 +2,10 @@
   "name": "ls",
   "version": "0.0.1",
   "description": "Express backend for the LifeTracker application",
-  "main": "nodemon server.js",
-  "scripts": {},
+  "main": " server.js",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",

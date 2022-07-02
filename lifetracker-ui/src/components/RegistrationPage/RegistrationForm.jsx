@@ -1,37 +1,39 @@
 import React from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import "./RegistrationForm.css"
+import axios from "axios"
 
 export default function RegistrationForm() {
-    const [isLoading, setIsLoading] = React.useState(false)
-    const [errors, setErrors] = React.useState({})
-    const [form, setForm] = React.useState({
-        email: "",
-        username: "",
-        firstName: "",
-        lastName: "",
-        password: "",
-        passwordConfirm: "",
-      })
+  const navigate = useNavigate()
+  const [isLoading, setIsLoading] = React.useState(false)
+  const [errors, setErrors] = React.useState({})
+  const [form, setForm] = React.useState({
+    email: "",
+    username: "",
+    firstName: "",
+    lastName: "",
+    password: "",
+    passwordConfirm: "",
+  })
 
     const handleOnInputChange = (event) => {
         if (event.target.name === "password") {
             if (form.passwordConfirm && form.passwordConfirm !== event.target.value) {
-              setErrors((e) => ({ ...e, passwordConfirm: "passwords don't match" }))
+              setErrors((e) => ({ ...e, passwordConfirm: "passwords don't match ❌" }))
             } else {
               setErrors((e) => ({ ...e, passwordConfirm: null }))
             }
         }
         if (event.target.name === "passwordConfirm") {
             if (form.password && form.password !== event.target.value) {
-              setErrors((e) => ({ ...e, passwordConfirm: "passwords don't match" }))
+              setErrors((e) => ({ ...e, passwordConfirm: "passwords don't match ❌ " }))
             } else {
               setErrors((e) => ({ ...e, passwordConfirm: null }))
             }
         }
         if (event.target.name === "email") {
             if (event.target.value.indexOf("@") === -1) {
-              setErrors((e) => ({ ...e, email: "Please enter a valid email." }))
+              setErrors((e) => ({ ...e, email: "Please enter a valid email. ❌" }))
             } else {
               setErrors((e) => ({ ...e, email: null }))
             }
@@ -39,19 +41,33 @@ export default function RegistrationForm() {
         setForm((f) => ({ ...f, [event.target.name]: event.target.value }))
     }
 
-    const signupUser = async (e) => {
-        e.preventDefault()
-        setIsLoading(true)
-        setErrors((e) => ({ ...e, form: null }))
+    const signupUser = async () => {
+      setIsLoading(true)
+      setErrors((e) => ({ ...e, form: null }))
+  
+      if (form.passwordConfirm !== form.password) {
+        setErrors((e) => ({ ...e, passwordConfirm: "Passwords do not match." }))
+        setIsLoading(false)
+        return
+      } else {
+        setErrors((e) => ({ ...e, passwordConfirm: null }))
+      }
     
         try {
-          const res = await axios.post(`http://localhost:3001/auth/login`, form)
-          if (res?.data) {
-            setAppState(res.data)
+          const res = await axios.post("http://localhost:3001/auth/register", {
+            email: form.email,
+            username: form.username,
+            firstName: form.firstName,
+            lastName: form.lastName,
+            password: form.password
+          })
+    
+          if (res?.data?.user) {
+            // setAppState(res.data)
             setIsLoading(false)
-            navigate("/portal")
+            navigate("/login")
           } else {
-            setErrors((e) => ({ ...e, form: "Invalid username/password combination" }))
+            setErrors((e) => ({ ...e, form: "Something went wrong with registration" }))
             setIsLoading(false)
           }
         } catch (err) {

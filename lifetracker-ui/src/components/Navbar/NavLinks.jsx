@@ -11,14 +11,11 @@ export default function NavLinks() {
         <Link to="/nutrition">Nutrition</Link>
     {/* If a valid user is logged in */}
         <button className={logState ? "hidden logout-button": "logout-button"} onClick={() => {
-        setLogState(!logState)
         }}>Logout</button>
     {/* If no valid user is logged in */}
         <Link to="/login" className={logState ? "logout-button" : "hidden logout-button" } onClick={() => {
-        setLogState(!logState)
         }}>Login</Link>
         <Link id="sign-up" to="/register" className={logState ? "logout-button" : "hidden logout-button"} onClick={() => {
-        setLogState(!logState)
         }}>Sign Up</Link>
     </div>
   )
