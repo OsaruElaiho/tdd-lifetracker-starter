@@ -1,56 +1,43 @@
-import React from "react"
+import * as React from "react"
 import { Link, useNavigate } from "react-router-dom"
 import "./LoginForm.css"
-import axios from "axios"
+import { useAuthContext } from "../../../contexts/auth"
 
-export default function LoginForm({ setAppState }) {
+
+export default function LoginForm(props) {
+  const {error, setError, isProcessing,loginUser} = useAuthContext();
   const navigate = useNavigate()
-  const [isLoading, setIsLoading] = React.useState(false)
-  const [errors, setErrors] = React.useState({})
   const [form, setForm] = React.useState({
     email: "",
     password: "",
   })
 
+
+  
   const handleOnInputChange = (event) => {
     if (event.target.name === "email") {
       if (event.target.value.indexOf("@") === -1) {
-        setErrors((e) => ({ ...e, email: "Please enter a valid email. ❌" }))
+        setError((e) => ({ ...e, email: "Please enter a valid email. ❌" }))
       } else {
-        setErrors((e) => ({ ...e, email: null }))
+        setError((e) => ({ ...e, email: null }))
       }
     }
+
     setForm((f) => ({ ...f, [event.target.name]: event.target.value }))
-  }
+}
 
-  const loginUser = async (e) => {
-    e.preventDefault()
-    setIsLoading(true)
-    setErrors((e) => ({ ...e, form: null }))
-
-    try {
-      const res = await axios.post(`http://localhost:3001/auth/login`, form)
-      if (res?.data) {
-        //setAppState(res.data)
-        setIsLoading(false)
-        navigate("/activity")
-      } else {
-        setErrors((e) => ({ ...e, form: "Invalid username/password combination ❌" }))
-        setIsLoading(false)
-      }
-    } catch (err) {
-      console.log(err)
-      const message = err?.response?.data?.error?.message
-      setErrors((e) => ({ ...e, form: message ? String(message) : String(err) }))
-      setIsLoading(false)
-    }
+const handleOnSubmit = async (e) => {
+  const valid = await loginUser(form);
+  if (valid){
+    navigate("/activity");
   }
+}
 
   return (
     <div className="login-form">
         <div className="card">
             <h2>Login</h2>
-            {Boolean(errors.form) && <span className="error">{errors.form}</span>}
+            {Boolean(error?.form) && <span className="error">{error?.form}</span>}
             <br />
             <label htmlFor="email">Email</label>
             <input 
@@ -61,7 +48,7 @@ export default function LoginForm({ setAppState }) {
             value={form.email} 
             onChange={handleOnInputChange}
             />
-            {errors.email && <span className="error">{errors.email}</span>}
+            {error?.email && <span className="error">{error?.email}</span>}
             <label htmlFor="password">Password</label>
             <input 
             className="form-input" 
@@ -71,9 +58,9 @@ export default function LoginForm({ setAppState }) {
             value={form.password} 
             onChange={handleOnInputChange}
             />
-            {errors.password && <span className="error">{errors.password}</span>}
-            <button className="submit-login" disabled={isLoading} onClick={loginUser}>
-                {isLoading ? "Loading..." : "Login"}
+            {error?.password && <span className="error">{error?.password}</span>}
+            <button className="submit-login" disabled={isProcessing} onClick={handleOnSubmit}>
+                {isProcessing ? "Loading..." : "Login"}
             </button>   
             
             <div className="footer">

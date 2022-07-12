@@ -15,7 +15,7 @@ a {
     color: white;
 }
 
-#sign-up, button {
+#sign-up, #login, #logout {
     background: transparent;
     border: 1px solid transparent;
     display: flex;
