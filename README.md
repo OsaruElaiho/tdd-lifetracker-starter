@@ -41,7 +41,9 @@ Implement any of the following features to improve the application:
 ### Walkthrough Video
 Week 4:
 https://www.loom.com/share/49bede1c49b9418c9037d423043ae300
+
 Week 5: 
+https://www.loom.com/share/be3b899b4e124cd4b947483e395f3f1f
 
 ### Reflection
 
@@ -63,4 +65,4 @@ Week 5:
 
 Give a shout out to somebody from your cohort that especially helped you during your project. This can be a fellow peer, instructor, TA, mentor, etc.
 
-- Daniel Jonas & Hayley Simmons
+- TA Roy, Daniel Jonas, & Hayley Simmons
